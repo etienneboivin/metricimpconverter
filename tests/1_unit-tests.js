@@ -8,17 +8,17 @@ suite('Unit Tests', function(){
   suite('Test convertHandler.getNum', function(){
     test('Whole number input', function(done) {
       var input = '24L';
-      assert.equal(convertHandler.getNum(input), '24');
+      assert.equal(convertHandler.getNum(input), 24);
       done();
     });
     test('Decimal number input', function(done) {
       var input = '24.4gal';
-      assert.equals(convertHandler.getNum(input), '24.4');
+      assert.equals(convertHandler.getNum(input), 24.4);
       done();
     })
     test('Fractional number input', function(done) {
       var input = '3/8mi';
-      assert.equals(convertHandler.getNum(input), '0.3750')
+      assert.equals(convertHandler.getNum(input), 0.3750)
       done();
     })
     test('Double-fraction input', function(done) {
