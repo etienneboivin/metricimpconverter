@@ -82,7 +82,7 @@ function ConvertHandler() {
         break;
     }
 
-    return result;
+    return result.toFixed(5);
   };
 
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
