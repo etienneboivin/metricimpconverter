@@ -1,44 +1,97 @@
 function ConvertHandler() {
-  
+
+  let regexStr = /[a-z]+|[^a-z]+/gi;
+  let units = {"gal": "l", "l": "gal", "lbs": "kg", "kg": "lbs", "mi": "km", "km": "mi"};
+  let spellUnits = {"gal": "gallons", "l": "litres", "lbs": "pounds", "kg": "kilograms",
+                      "mi": "miles", "km": "kilometres"}
   this.getNum = function(input) {
-    let result;
-    
+    let result = input.match(regexStr)[0];
+    let numberRegex = /\d/;
+
+    if(!numberRegex.test(result)) {
+      result = 1;
+    }
+
+    if(result.toString().includes('/')) {
+      fraction = result.split('/');
+      if (fraction.length != 2) {
+        return 'invalid number'
+      }
+      fraction[0] = parseFloat(fraction[0]);
+      fraction[1] = parseFloat(fraction[1]);
+      result = parseFloat(fraction[0]/fraction[1]).toFixed(5);
+    }
+
+    if(isNaN(result)) {
+      return 'invalid number'
+    }
+
     return result;
   };
-  
+
   this.getUnit = function(input) {
-    let result;
-    
+    let validUnits = ['l', 'gal', 'lbs', 'kg', 'mi', 'km']
+    let result = input.match(regexStr)[1];
+    if(!result) {
+      result = input.match(regexStr)[0];
+    }
+
+    result = result.toLowerCase();
+
+    if(!validUnits.includes(result)) {
+      return "invalid units";
+    }
     return result;
   };
-  
+
   this.getReturnUnit = function(initUnit) {
-    let result;
-    
+    let result = units[initUnit];
+
     return result;
   };
 
   this.spellOutUnit = function(unit) {
-    let result;
-    
+    let result = spellUnits[unit];
     return result;
   };
-  
+
   this.convert = function(initNum, initUnit) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
+
     let result;
-    
+    switch(initUnit) {
+      case "gal":
+        result = initNum * galToL;
+        break;
+      case "l":
+        result = initNum / galToL;
+        break;
+      case "lbs":
+        result = initNum * lbsToKg;
+        break;
+      case "kg":
+        result = initNum / lbsToKg;
+        break;
+      case "km":
+        result = initNum * miToKm;
+        break;
+      case "mi":
+        result = initNum / miToKm;
+        break;
+    }
+
     return result;
   };
-  
+
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let result;
-    
+    let result = initNum + " " + spellUnits[initUnit] + " converts to " +
+                returnNum + " " + spellUnits[returnUnit];
+
     return result;
   };
-  
+
 }
 
 module.exports = ConvertHandler;
