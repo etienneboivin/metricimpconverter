@@ -7,7 +7,7 @@ let convertHandler = new ConvertHandler();
 suite('Unit Tests', function(){
   suite('Test convertHandler.getNum', function(){
     test('Whole number input', function(done) {
-      var input = '24l';
+      var input = '24L';
       assert.equal(convertHandler.getNum(input), '24');
       done();
     });
@@ -42,7 +42,7 @@ suite('Unit Tests', function(){
                     'km', 'KM'];
       inputs.forEach(function(element) {
         assert.equals(convertHandler.getUnit('24' + element),
-                        element.toLowerCase());
+                        element);
       })
       done();
     })
@@ -53,8 +53,8 @@ suite('Unit Tests', function(){
   });
   suite('Test convertHandler.getReturnUnit', function(){
     test('Return correct unit for each valid input unit', function(done){
-      inputs = ['l', 'gal', 'lbs', 'kg', 'mi', 'km'];
-      outputs = ['gal', 'l', 'kg', 'lbs', 'km', 'mi'];
+      inputs = ['L', 'gal', 'lbs', 'kg', 'mi', 'km'];
+      outputs = ['gal', 'L', 'kg', 'lbs', 'km', 'mi'];
       inputs.forEach(function(element, index) {
         assert.equals(convertHandler.getUnit(element), outputs[index]);
       })
@@ -63,7 +63,7 @@ suite('Unit Tests', function(){
   });
   suite('Test convertHandler.spellOutUnit', function(){
     test('Return spelled out string unit for each valid input', function(done) {
-      inputs = ['l', 'gal', 'lbs', 'kg', 'mi', 'km'];
+      inputs = ['L', 'gal', 'lbs', 'kg', 'mi', 'km'];
       outputs = ['litres', 'gallons', 'pounds', 'kilograms', 'miles',
                   'kilometres'];
       inputs.forEach(function(element, index){
@@ -73,12 +73,12 @@ suite('Unit Tests', function(){
     })
   });
   suite('Test convertHandler.convert', function(){
-    test('Correctly convert gal to l', function(done){
+    test('Correctly convert gal to L', function(done){
       assert.equals(convertHandler.convert(3, 'gal'), 11.3562)
       done();
     })
-    test('Correctly convert l to gal', function(done){
-      assert.equals(convertHandler.convert(7, 'l'), 1.8492)
+    test('Correctly convert L to gal', function(done){
+      assert.equals(convertHandler.convert(7, 'L'), 1.8492)
       done();
     })
     test('Correctly convert mi to km', function(done){
@@ -98,6 +98,4 @@ suite('Unit Tests', function(){
       done();
     })
   })
-
-
 });

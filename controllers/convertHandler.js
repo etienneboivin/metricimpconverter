@@ -1,8 +1,8 @@
 function ConvertHandler() {
 
   let regexStr = /[a-z]+|[^a-z]+/gi;
-  let units = {"gal": "l", "l": "gal", "lbs": "kg", "kg": "lbs", "mi": "km", "km": "mi"};
-  let spellUnits = {"gal": "gallons", "l": "litres", "lbs": "pounds", "kg": "kilograms",
+  let units = {"gal": "L", "L": "gal", "lbs": "kg", "kg": "lbs", "mi": "km", "km": "mi"};
+  let spellUnits = {"gal": "gallons", "L": "litres", "lbs": "pounds", "kg": "kilograms",
                       "mi": "miles", "km": "kilometres"}
   this.getNum = function(input) {
     let result = input.match(regexStr)[0];
@@ -30,13 +30,13 @@ function ConvertHandler() {
   };
 
   this.getUnit = function(input) {
-    let validUnits = ['l', 'gal', 'lbs', 'kg', 'mi', 'km']
+    let validUnits = ['L', 'gal', 'lbs', 'kg', 'mi', 'km']
     let result = input.match(regexStr)[1];
     if(!result) {
       result = input.match(regexStr)[0];
     }
 
-    result = result.toLowerCase();
+    result = result;
 
     if(!validUnits.includes(result)) {
       return "invalid units";
@@ -65,7 +65,7 @@ function ConvertHandler() {
       case "gal":
         result = initNum * galToL;
         break;
-      case "l":
+      case "L":
         result = initNum / galToL;
         break;
       case "lbs":
