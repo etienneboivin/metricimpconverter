@@ -13,7 +13,7 @@ suite('Functional Tests', function() {
         .get('/api/convert')
         .query({input: '10L'})
         .end(function(err, res) {
-          console.log(res.toString);
+          console.log(res.initNum);
           assert.equal(res.status, 200)
           assert.equal(res.initNum, 10)
           assert.equal(res.initUnit, 'L')
