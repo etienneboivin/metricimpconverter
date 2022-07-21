@@ -6,7 +6,6 @@ function ConvertHandler() {
                       "mi": "miles", "km": "kilometers"}
   this.getNum = function(input) {
     let result = input.match(regexStr)[0];
-    console.log("Here is the result of the first regex match: " + result);
     let numberRegex = /\d/;
 
     if(!numberRegex.test(result)) {
@@ -26,7 +25,6 @@ function ConvertHandler() {
     if(isNaN(result)) {
       return 'invalid number';
     }
-    console.log(parseFloat(result));
     return parseFloat(result);
   };
 
