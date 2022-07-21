@@ -15,10 +15,10 @@ module.exports = function (app) {
     let returnNum = convertHandler.convert(initNum, initUnit);
     let returnUnit = convertHandler.getReturnUnit(initUnit);
     let spellOutUnit = convertHandler.spellOutUnit(input);
-    let string = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
+    let finalString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
 
     if(initNum == 'invalid number' && initUnit == 'invalid units') {
-      res.json('invalid number and unit');
+      res.json('invalid number and units');
     }
 
     if(initNum == 'invalid number') {
@@ -26,11 +26,17 @@ module.exports = function (app) {
     }
 
     if(initUnit == 'invalid units') {
-      res.json('invlaid units');
+      res.json('invalid units');
     }
 
-    res.json({"initNum": initNum, "initUnit": initUnit, "returnNum": returnNum,
-              "returnUnit": returnUnit, "string": string});
+    let responseObject = {}
+    responseObject['initNum'] = initNum
+    responseObject['initUnit'] = initUnit
+    responseObject['returnNum'] = returnNum
+    responseObject['returnUnit'] = returnUnit
+    responseObject['string'] = finalString
+
+    res.json(responseObject)
   });
 
 };

@@ -2,10 +2,11 @@ function ConvertHandler() {
 
   let regexStr = /[a-z]+|[^a-z]+/gi;
   let units = {"gal": "L", "L": "gal", "lbs": "kg", "kg": "lbs", "mi": "km", "km": "mi"};
-  let spellUnits = {"gal": "gallons", "L": "litres", "lbs": "pounds", "kg": "kilograms",
-                      "mi": "miles", "km": "kilometres"}
+  let spellUnits = {"gal": "gallons", "L": "liters", "lbs": "pounds", "kg": "kilograms",
+                      "mi": "miles", "km": "kilometers"}
   this.getNum = function(input) {
     let result = input.match(regexStr)[0];
+    console.log("Here is the result of the first regex match: " + result);
     let numberRegex = /\d/;
 
     if(!numberRegex.test(result)) {
@@ -15,7 +16,7 @@ function ConvertHandler() {
     if(result.toString().includes('/')) {
       fraction = result.split('/');
       if (fraction.length != 2) {
-        return 'invalid number'
+        return 'invalid number';
       }
       fraction[0] = parseFloat(fraction[0]);
       fraction[1] = parseFloat(fraction[1]);
@@ -23,10 +24,10 @@ function ConvertHandler() {
     }
 
     if(isNaN(result)) {
-      return 'invalid number'
+      return 'invalid number';
     }
-
-    return result;
+    console.log(parseFloat(result));
+    return parseFloat(result);
   };
 
   this.getUnit = function(input) {
@@ -36,9 +37,7 @@ function ConvertHandler() {
       result = input.match(regexStr)[0];
     }
 
-    result = result;
-
-    if(!validUnits.includes(result)) {
+    if(!(validUnits.includes(result))) {
       return "invalid units";
     }
     return result;
@@ -63,26 +62,26 @@ function ConvertHandler() {
     let result;
     switch(initUnit) {
       case "gal":
-        result = initNum * galToL;
+        result = parseFloat(initNum * galToL);
         break;
       case "L":
-        result = initNum / galToL;
+        result = parseFloat(initNum / galToL);
         break;
       case "lbs":
-        result = initNum * lbsToKg;
+        result = parseFloat(initNum * lbsToKg);
         break;
       case "kg":
-        result = initNum / lbsToKg;
+        result = parseFloat(initNum / lbsToKg);
         break;
       case "km":
-        result = initNum * miToKm;
+        result = parseFloat(initNum / miToKm);
         break;
       case "mi":
-        result = initNum / miToKm;
+        result = parseFloat(initNum * miToKm);
         break;
     }
 
-    return result.toFixed(5);
+    return parseFloat(result.toFixed(5));
   };
 
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
