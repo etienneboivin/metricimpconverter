@@ -12,24 +12,19 @@ module.exports = function (app) {
     let input = req.query.input;
     let initNum = convertHandler.getNum(input);
     let initUnit = convertHandler.getUnit(input);
+    console.log(initUnit);
     let returnNum = convertHandler.convert(initNum, initUnit);
     let returnUnit = convertHandler.getReturnUnit(initUnit);
-    let spellOutUnit = convertHandler.spellOutUnit(input);
     let finalString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
-    console.log(initNum);
-    console.log(initUnit);
-    console.log(returnNum);
-    console.log(returnUnit);
-    console.log(spellOutUnit);
-    if(initNum == 'invalid number' && initUnit == 'invalid units') {
+    if(initNum === 'invalid number' && initUnit === 'invalid units') {
       res.json('invalid number and units');
     }
 
-    if(initNum == 'invalid number') {
+    if(initNum === 'invalid number') {
       res.json('invalid number');
     }
 
-    if(initUnit == 'invalid units') {
+    if(initUnit === 'invalid units') {
       res.json('invalid units');
     }
 
@@ -39,8 +34,7 @@ module.exports = function (app) {
     responseObject['returnNum'] = returnNum
     responseObject['returnUnit'] = returnUnit
     responseObject['string'] = finalString
-
     res.json(responseObject)
-  });
 
+  });
 };

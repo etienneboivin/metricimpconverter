@@ -4,6 +4,8 @@ function ConvertHandler() {
   let units = {"gal": "L", "L": "gal", "lbs": "kg", "kg": "lbs", "mi": "km", "km": "mi"};
   let spellUnits = {"gal": "gallons", "L": "liters", "lbs": "pounds", "kg": "kilograms",
                       "mi": "miles", "km": "kilometers"}
+  let validUnits = ['L', 'gal', 'lbs', 'kg', 'mi', 'km']
+
   this.getNum = function(input) {
     let result = input.match(regexStr)[0];
     let numberRegex = /\d/;
@@ -25,11 +27,10 @@ function ConvertHandler() {
     if(isNaN(result)) {
       return 'invalid number';
     }
-    return parseFloat(result);
+    return result;
   };
 
   this.getUnit = function(input) {
-    let validUnits = ['L', 'gal', 'lbs', 'kg', 'mi', 'km']
     let result = input.match(regexStr)[1];
     if(!result) {
       result = input.match(regexStr)[0];
@@ -42,14 +43,18 @@ function ConvertHandler() {
   };
 
   this.getReturnUnit = function(initUnit) {
+    if(initUnit === "invalid units"){
+      return "invalid units";
+    }
     let result = units[initUnit];
-
     return result;
   };
 
   this.spellOutUnit = function(unit) {
-    let result = spellUnits[unit];
-    return result;
+    if(validUnits.includes(unit)) {
+      return spellUnits[unit];
+    }
+    return "invalid units";
   };
 
   this.convert = function(initNum, initUnit) {
@@ -77,15 +82,16 @@ function ConvertHandler() {
       case "mi":
         result = parseFloat(initNum * miToKm);
         break;
+      default:
+        return "invalid units";
     }
 
     return parseFloat(result.toFixed(5));
   };
 
   this.getString = function(initNum, initUnit, returnNum, returnUnit) {
-    let result = initNum + " " + spellUnits[initUnit] + " converts to " +
-                returnNum + " " + spellUnits[returnUnit];
-
+    let result = initNum + " " + this.spellOutUnit(initUnit) + " converts to " +
+                returnNum + " " + this.spellOutUnit(returnUnit);
     return result;
   };
 
