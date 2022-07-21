@@ -16,7 +16,11 @@ module.exports = function (app) {
     let returnUnit = convertHandler.getReturnUnit(initUnit);
     let spellOutUnit = convertHandler.spellOutUnit(input);
     let finalString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
-
+    console.log(initNum);
+    console.log(initUnit);
+    console.log(returnNum);
+    console.log(returnUnit);
+    console.log(spellOutUnit);
     if(initNum == 'invalid number' && initUnit == 'invalid units') {
       res.json('invalid number and units');
     }
