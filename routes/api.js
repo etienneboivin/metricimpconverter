@@ -12,20 +12,19 @@ module.exports = function (app) {
     let input = req.query.input;
     let initNum = convertHandler.getNum(input);
     let initUnit = convertHandler.getUnit(input);
-    console.log(initUnit);
     let returnNum = convertHandler.convert(initNum, initUnit);
     let returnUnit = convertHandler.getReturnUnit(initUnit);
     let finalString = convertHandler.getString(initNum, initUnit, returnNum, returnUnit);
-    if(initNum === 'invalid number' && initUnit === 'invalid units') {
-      res.json('invalid number and units');
+    if(initNum === 'invalid number' && initUnit === 'invalid unit') {
+      res.json('invalid number and unit');
     }
 
     if(initNum === 'invalid number') {
       res.json('invalid number');
     }
 
-    if(initUnit === 'invalid units') {
-      res.json('invalid units');
+    if(initUnit === 'invalid unit') {
+      res.json('invalid unit');
     }
 
     let responseObject = {}

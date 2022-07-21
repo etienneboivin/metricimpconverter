@@ -37,14 +37,14 @@ function ConvertHandler() {
     }
 
     if(!(validUnits.includes(result))) {
-      return "invalid units";
+      return "invalid unit";
     }
     return result;
   };
 
   this.getReturnUnit = function(initUnit) {
-    if(initUnit === "invalid units"){
-      return "invalid units";
+    if(initUnit === "invalid unit"){
+      return "invalid unit";
     }
     let result = units[initUnit];
     return result;
@@ -83,7 +83,7 @@ function ConvertHandler() {
         result = parseFloat(initNum * miToKm);
         break;
       default:
-        return "invalid units";
+        return "invalid unit";
     }
 
     return parseFloat(result.toFixed(5));
